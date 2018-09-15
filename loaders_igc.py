@@ -63,8 +63,8 @@ def GLoadIGC(fname):
             utime = int(l[1:3])*3600+int(l[3:5])*60+int(l[5:7])
             latminutes1000 = int(l[7:9])*60000+int(l[9:11])*1000+int(l[11:14])
             lngminutes1000 = (int(l[15:18])*60000+int(l[18:20])*1000+int(l[20:23]))*(l[23]==ord('E') and 1 or -1) 
-            s = int(l[35:]) if len(l) >= 40 else 0
-            recs.append((latminutes1000/60000, lngminutes1000/60000, int(l[25:30]), int(l[30:35]), s, utime*1000))
+            #s = int(l[35:]) if len(l) >= 40 else 0
+            recs.append((latminutes1000/60000, lngminutes1000/60000, int(l[25:30]), int(l[30:35]), utime*1000))
             tind.append(IGCdatetime0 + pandas.Timedelta(seconds=utime))
-    return pandas.DataFrame.from_records(recs, columns=["lat", "lng", "alt", "altb", "s", "u"], index=tind), hfcodes
+    return pandas.DataFrame.from_records(recs, columns=["lat", "lng", "alt", "altb", "u"], index=tind), hfcodes
 
